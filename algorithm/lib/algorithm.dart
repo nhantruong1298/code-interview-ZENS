@@ -3,10 +3,20 @@ List<int> miniMaxSum(List<int> array) {
     throw ArgumentError('Array must have 5 elements');
   }
 
-  array.sort();
+  int min = array.first;
+  int max = array.first;
 
-  int minSum = array.sublist(0, 4).reduce((a, b) => a + b);
-  int maxSum = array.sublist(1, 5).reduce((a, b) => a + b);
+  int sum = array.reduce((value, element) {
+    if (element < min) {
+      min = element;
+    }
 
-  return [minSum, maxSum];
+    if (element > max) {
+      max = element;
+    }
+
+    return value + element;
+  });
+
+  return [sum - max, sum - min];
 }
